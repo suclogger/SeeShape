@@ -1,0 +1,6 @@
+framework module Pods_SeeShape_IOS {
+  umbrella header "Pods-SeeShape-IOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

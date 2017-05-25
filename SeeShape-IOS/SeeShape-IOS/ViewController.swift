@@ -73,7 +73,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         let size = CGSize(width: 30, height: 30)
         startAnimating(size, message: "Loading...", type: NVActivityIndicatorType(rawValue: 3)!)
         
-        let url = NSURL(string: "http://172.21.3.33:5000/see_shape")
+        let url = NSURL(string: "http://172.21.2.116:5000/see_shape")
         
         let request = NSMutableURLRequest(url: url! as URL)
         request.httpMethod = "POST"
@@ -89,19 +89,12 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
             return
         }
         
-        let image_data = UIImagePNGRepresentation(imagePicked.image!)
-        
-        
-        if(image_data == nil)
-        {
-            return
-        }
-        
+        let image_data = UIImageJPEGRepresentation(imagePicked.image!, 0.025)!
         
         let body = NSMutableData()
         
-        let fname = "test.png"
-        let mimetype = "image/png"
+        let fname = "test.jpg"
+        let mimetype = "image/jpeg"
         
         //define the data post parameter
         
@@ -113,7 +106,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         body.append("Content-Disposition:form-data; name=\"file\"; filename=\"\(fname)\"\r\n".data(using: String.Encoding.utf8)!)
         body.append("Content-Type: \(mimetype)\r\n\r\n".data(using: String.Encoding.utf8)!)
         
-        body.append(image_data!)
+        body.append(image_data)
         
         body.append("\r\n".data(using: String.Encoding.utf8)!)
         body.append("--\(boundary)--\r\n".data(using: String.Encoding.utf8)!)
